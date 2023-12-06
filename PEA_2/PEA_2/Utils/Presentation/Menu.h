@@ -8,17 +8,17 @@
 
 
 #include "../Reader/FileReader.h"
-
-
+#include "../../Algorithms/TabuSearch/TabuSearchImplementation.h"
 
 
 class Menu {
 public:
     Menu();
     void displayMenu();
-    void displayAlgorithms(AdjacencyMatrix matrix);
+    void displayAlgorithms(std::vector<std::vector<int>> graph);
     FileReader *fileReader;
-    int** parent;
+    TabuSearchImplementation *tabuSearchImplementation;
+    std::vector<std::vector<int>> graph;
     void doTests(int num_cities, std::string file, int number_of_tests);
 };
 

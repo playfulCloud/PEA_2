@@ -16,7 +16,7 @@ Menu::Menu(){
 void Menu::displayMenu() {
     std::cout << "=========================== Effective algorithm design 2 ===========================" << std::endl;
     int gate = 0;
-    while (gate != 8) {
+    while (gate != 4) {
         std::cout << "Choose what do you want to do: " << std::endl;
         std::cout << "1 - Read data from XML File" << std::endl;
         std::cout << "2 - Choose algorithm with read data" << std::endl;
@@ -25,15 +25,12 @@ void Menu::displayMenu() {
         std::cin >> gate;
         switch (gate) {
             case 1:
-                fileReader->readFromFile();
+                graph = fileReader->readFromFile();
                 break;
             case 2:
-
+                displayAlgorithms(graph);
                 break;
             case 3:
-
-                break;
-            case 4:
 
                 break;
         }
@@ -41,11 +38,10 @@ void Menu::displayMenu() {
 }
 
 
-void Menu::displayAlgorithms(AdjacencyMatrix matrix) {
+void Menu::displayAlgorithms(std::vector<std::vector<int>> graph) {
     std::cout << "=========================== Algorithms menu ===========================" << std::endl;
-    std::cout << "AdjacencyMatrix: " + matrix.type << std::endl;
     int gate = 0;
-    while (gate != 5) {
+    while (gate != 3) {
         std::cout << "Choose what do you want to do: " << std::endl;
         std::cout << "1 - Tabu Search" << std::endl;
         std::cout << "2 - Simulated annealing" << std::endl;
@@ -53,6 +49,23 @@ void Menu::displayAlgorithms(AdjacencyMatrix matrix) {
         std::cin >> gate;
         switch (gate) {
             case 1:
+                int neighbor;
+                int timeLimit;
+                std::cout << "Please enter the neighbor type: " << std::endl;
+                std::cout << "1 - Swap " << std::endl;
+                std::cout << "2 - Insert " << std::endl;
+                std::cout << "2 - Inverse " << std::endl;
+                std::cin >> neighbor;
+
+                std::cout << "Neighbor accepted! " << std::endl;
+                std::cout << "" << std::endl;
+                std::cout << "" << std::endl;
+
+                std::cout << "Please enter the ms time limit: " << std::endl;
+                std::cin >> timeLimit;
+
+                tabuSearchImplementation = new TabuSearchImplementation(graph,timeLimit,neighbor);
+                tabuSearchImplementation->solve();
 
                 break;
             case 2:

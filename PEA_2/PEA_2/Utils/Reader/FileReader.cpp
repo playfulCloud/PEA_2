@@ -64,7 +64,6 @@ std::vector<std::vector<int>> FileReader::readFromFile() {
 
     file.close();
 
-    std::cout << "Ilość miast: " << adjacencyMatrix[35][35] << std::endl;
 
     // Opcjonalne: Drukowanie macierzy sąsiedztwa
     for (const auto &row : adjacencyMatrix) {
