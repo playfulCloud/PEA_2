@@ -1,6 +1,0 @@
-Brute: 
-19710
-dynamic: 
-20210
-branch: 
-9980

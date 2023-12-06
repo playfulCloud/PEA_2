@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: PEA_1
+# Project: PEA_2
 # Configurations: Debug
 # =============================================================================
 
@@ -39,94 +39,82 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = C$:/Users/Jakub/CLionProjects/PEA_1/cmake-build-debug/
+cmake_ninja_workdir = C$:/Users/Jakub/CLionProjects/PEA_2/PEA_2/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target PEA_1
+# Object build statements for EXECUTABLE target PEA_2
 
 
 #############################################
-# Order-only phony target for PEA_1
+# Order-only phony target for PEA_2
 
-build cmake_object_order_depends_target_PEA_1: phony || CMakeFiles/PEA_1.dir
+build cmake_object_order_depends_target_PEA_2: phony || CMakeFiles/PEA_2.dir
 
-build CMakeFiles/PEA_1.dir/main.cpp.obj: CXX_COMPILER__PEA_1_Debug C$:/Users/Jakub/CLionProjects/PEA_1/main.cpp || cmake_object_order_depends_target_PEA_1
-  DEP_FILE = CMakeFiles\PEA_1.dir\main.cpp.obj.d
+build CMakeFiles/PEA_2.dir/main.cpp.obj: CXX_COMPILER__PEA_2_Debug C$:/Users/Jakub/CLionProjects/PEA_2/PEA_2/main.cpp || cmake_object_order_depends_target_PEA_2
+  DEP_FILE = CMakeFiles\PEA_2.dir\main.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu++17
-  OBJECT_DIR = CMakeFiles\PEA_1.dir
-  OBJECT_FILE_DIR = CMakeFiles\PEA_1.dir
+  OBJECT_DIR = CMakeFiles\PEA_2.dir
+  OBJECT_FILE_DIR = CMakeFiles\PEA_2.dir
 
-build CMakeFiles/PEA_1.dir/PEA_1/Utils/Presentation/Menu.cpp.obj: CXX_COMPILER__PEA_1_Debug C$:/Users/Jakub/CLionProjects/PEA_1/PEA_1/Utils/Presentation/Menu.cpp || cmake_object_order_depends_target_PEA_1
-  DEP_FILE = CMakeFiles\PEA_1.dir\PEA_1\Utils\Presentation\Menu.cpp.obj.d
+build CMakeFiles/PEA_2.dir/PEA_2/Utils/Presentation/Menu.cpp.obj: CXX_COMPILER__PEA_2_Debug C$:/Users/Jakub/CLionProjects/PEA_2/PEA_2/PEA_2/Utils/Presentation/Menu.cpp || cmake_object_order_depends_target_PEA_2
+  DEP_FILE = CMakeFiles\PEA_2.dir\PEA_2\Utils\Presentation\Menu.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu++17
-  OBJECT_DIR = CMakeFiles\PEA_1.dir
-  OBJECT_FILE_DIR = CMakeFiles\PEA_1.dir\PEA_1\Utils\Presentation
+  OBJECT_DIR = CMakeFiles\PEA_2.dir
+  OBJECT_FILE_DIR = CMakeFiles\PEA_2.dir\PEA_2\Utils\Presentation
 
-build CMakeFiles/PEA_1.dir/PEA_1/Utils/Reader/FileReader.cpp.obj: CXX_COMPILER__PEA_1_Debug C$:/Users/Jakub/CLionProjects/PEA_1/PEA_1/Utils/Reader/FileReader.cpp || cmake_object_order_depends_target_PEA_1
-  DEP_FILE = CMakeFiles\PEA_1.dir\PEA_1\Utils\Reader\FileReader.cpp.obj.d
+build CMakeFiles/PEA_2.dir/PEA_2/Utils/Reader/FileReader.cpp.obj: CXX_COMPILER__PEA_2_Debug C$:/Users/Jakub/CLionProjects/PEA_2/PEA_2/PEA_2/Utils/Reader/FileReader.cpp || cmake_object_order_depends_target_PEA_2
+  DEP_FILE = CMakeFiles\PEA_2.dir\PEA_2\Utils\Reader\FileReader.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu++17
-  OBJECT_DIR = CMakeFiles\PEA_1.dir
-  OBJECT_FILE_DIR = CMakeFiles\PEA_1.dir\PEA_1\Utils\Reader
+  OBJECT_DIR = CMakeFiles\PEA_2.dir
+  OBJECT_FILE_DIR = CMakeFiles\PEA_2.dir\PEA_2\Utils\Reader
 
-build CMakeFiles/PEA_1.dir/PEA_1/Utils/Timer/TimeCounter.cpp.obj: CXX_COMPILER__PEA_1_Debug C$:/Users/Jakub/CLionProjects/PEA_1/PEA_1/Utils/Timer/TimeCounter.cpp || cmake_object_order_depends_target_PEA_1
-  DEP_FILE = CMakeFiles\PEA_1.dir\PEA_1\Utils\Timer\TimeCounter.cpp.obj.d
+build CMakeFiles/PEA_2.dir/PEA_2/Utils/Timer/TimeCounter.cpp.obj: CXX_COMPILER__PEA_2_Debug C$:/Users/Jakub/CLionProjects/PEA_2/PEA_2/PEA_2/Utils/Timer/TimeCounter.cpp || cmake_object_order_depends_target_PEA_2
+  DEP_FILE = CMakeFiles\PEA_2.dir\PEA_2\Utils\Timer\TimeCounter.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu++17
-  OBJECT_DIR = CMakeFiles\PEA_1.dir
-  OBJECT_FILE_DIR = CMakeFiles\PEA_1.dir\PEA_1\Utils\Timer
+  OBJECT_DIR = CMakeFiles\PEA_2.dir
+  OBJECT_FILE_DIR = CMakeFiles\PEA_2.dir\PEA_2\Utils\Timer
 
-build CMakeFiles/PEA_1.dir/PEA_1/Algorithms/BruteForce/BruteForce_Implementation.cpp.obj: CXX_COMPILER__PEA_1_Debug C$:/Users/Jakub/CLionProjects/PEA_1/PEA_1/Algorithms/BruteForce/BruteForce_Implementation.cpp || cmake_object_order_depends_target_PEA_1
-  DEP_FILE = CMakeFiles\PEA_1.dir\PEA_1\Algorithms\BruteForce\BruteForce_Implementation.cpp.obj.d
+build CMakeFiles/PEA_2.dir/PEA_2/Utils/CityMatrix/AdjacencyMatrix.cpp.obj: CXX_COMPILER__PEA_2_Debug C$:/Users/Jakub/CLionProjects/PEA_2/PEA_2/PEA_2/Utils/CityMatrix/AdjacencyMatrix.cpp || cmake_object_order_depends_target_PEA_2
+  DEP_FILE = CMakeFiles\PEA_2.dir\PEA_2\Utils\CityMatrix\AdjacencyMatrix.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu++17
-  OBJECT_DIR = CMakeFiles\PEA_1.dir
-  OBJECT_FILE_DIR = CMakeFiles\PEA_1.dir\PEA_1\Algorithms\BruteForce
+  OBJECT_DIR = CMakeFiles\PEA_2.dir
+  OBJECT_FILE_DIR = CMakeFiles\PEA_2.dir\PEA_2\Utils\CityMatrix
 
-build CMakeFiles/PEA_1.dir/PEA_1/Algorithms/BranchAndBound/BranchAndBound_Implementation.cpp.obj: CXX_COMPILER__PEA_1_Debug C$:/Users/Jakub/CLionProjects/PEA_1/PEA_1/Algorithms/BranchAndBound/BranchAndBound_Implementation.cpp || cmake_object_order_depends_target_PEA_1
-  DEP_FILE = CMakeFiles\PEA_1.dir\PEA_1\Algorithms\BranchAndBound\BranchAndBound_Implementation.cpp.obj.d
+build CMakeFiles/PEA_2.dir/PEA_2/Algorithms/TabuSearch/TabuSearchImplementation.cpp.obj: CXX_COMPILER__PEA_2_Debug C$:/Users/Jakub/CLionProjects/PEA_2/PEA_2/PEA_2/Algorithms/TabuSearch/TabuSearchImplementation.cpp || cmake_object_order_depends_target_PEA_2
+  DEP_FILE = CMakeFiles\PEA_2.dir\PEA_2\Algorithms\TabuSearch\TabuSearchImplementation.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu++17
-  OBJECT_DIR = CMakeFiles\PEA_1.dir
-  OBJECT_FILE_DIR = CMakeFiles\PEA_1.dir\PEA_1\Algorithms\BranchAndBound
+  OBJECT_DIR = CMakeFiles\PEA_2.dir
+  OBJECT_FILE_DIR = CMakeFiles\PEA_2.dir\PEA_2\Algorithms\TabuSearch
 
-build CMakeFiles/PEA_1.dir/PEA_1/Algorithms/DynamicProgramming/DynamicProgramming_implementation.cpp.obj: CXX_COMPILER__PEA_1_Debug C$:/Users/Jakub/CLionProjects/PEA_1/PEA_1/Algorithms/DynamicProgramming/DynamicProgramming_implementation.cpp || cmake_object_order_depends_target_PEA_1
-  DEP_FILE = CMakeFiles\PEA_1.dir\PEA_1\Algorithms\DynamicProgramming\DynamicProgramming_implementation.cpp.obj.d
+build CMakeFiles/PEA_2.dir/PEA_2/Algorithms/SimulatedAnnealing/SimulatedAnnealing.cpp.obj: CXX_COMPILER__PEA_2_Debug C$:/Users/Jakub/CLionProjects/PEA_2/PEA_2/PEA_2/Algorithms/SimulatedAnnealing/SimulatedAnnealing.cpp || cmake_object_order_depends_target_PEA_2
+  DEP_FILE = CMakeFiles\PEA_2.dir\PEA_2\Algorithms\SimulatedAnnealing\SimulatedAnnealing.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu++17
-  OBJECT_DIR = CMakeFiles\PEA_1.dir
-  OBJECT_FILE_DIR = CMakeFiles\PEA_1.dir\PEA_1\Algorithms\DynamicProgramming
-
-build CMakeFiles/PEA_1.dir/PEA_1/Utils/RandomGenerator/Generator.cpp.obj: CXX_COMPILER__PEA_1_Debug C$:/Users/Jakub/CLionProjects/PEA_1/PEA_1/Utils/RandomGenerator/Generator.cpp || cmake_object_order_depends_target_PEA_1
-  DEP_FILE = CMakeFiles\PEA_1.dir\PEA_1\Utils\RandomGenerator\Generator.cpp.obj.d
-  FLAGS = -g -fdiagnostics-color=always -std=gnu++17
-  OBJECT_DIR = CMakeFiles\PEA_1.dir
-  OBJECT_FILE_DIR = CMakeFiles\PEA_1.dir\PEA_1\Utils\RandomGenerator
-
-build CMakeFiles/PEA_1.dir/PEA_1/Utils/CityMatrix/Matrix.cpp.obj: CXX_COMPILER__PEA_1_Debug C$:/Users/Jakub/CLionProjects/PEA_1/PEA_1/Utils/CityMatrix/Matrix.cpp || cmake_object_order_depends_target_PEA_1
-  DEP_FILE = CMakeFiles\PEA_1.dir\PEA_1\Utils\CityMatrix\Matrix.cpp.obj.d
-  FLAGS = -g -fdiagnostics-color=always -std=gnu++17
-  OBJECT_DIR = CMakeFiles\PEA_1.dir
-  OBJECT_FILE_DIR = CMakeFiles\PEA_1.dir\PEA_1\Utils\CityMatrix
+  OBJECT_DIR = CMakeFiles\PEA_2.dir
+  OBJECT_FILE_DIR = CMakeFiles\PEA_2.dir\PEA_2\Algorithms\SimulatedAnnealing
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target PEA_1
+# Link build statements for EXECUTABLE target PEA_2
 
 
 #############################################
-# Link the executable PEA_1.exe
+# Link the executable PEA_2.exe
 
-build PEA_1.exe: CXX_EXECUTABLE_LINKER__PEA_1_Debug CMakeFiles/PEA_1.dir/main.cpp.obj CMakeFiles/PEA_1.dir/PEA_1/Utils/Presentation/Menu.cpp.obj CMakeFiles/PEA_1.dir/PEA_1/Utils/Reader/FileReader.cpp.obj CMakeFiles/PEA_1.dir/PEA_1/Utils/Timer/TimeCounter.cpp.obj CMakeFiles/PEA_1.dir/PEA_1/Algorithms/BruteForce/BruteForce_Implementation.cpp.obj CMakeFiles/PEA_1.dir/PEA_1/Algorithms/BranchAndBound/BranchAndBound_Implementation.cpp.obj CMakeFiles/PEA_1.dir/PEA_1/Algorithms/DynamicProgramming/DynamicProgramming_implementation.cpp.obj CMakeFiles/PEA_1.dir/PEA_1/Utils/RandomGenerator/Generator.cpp.obj CMakeFiles/PEA_1.dir/PEA_1/Utils/CityMatrix/Matrix.cpp.obj
+build PEA_2.exe: CXX_EXECUTABLE_LINKER__PEA_2_Debug CMakeFiles/PEA_2.dir/main.cpp.obj CMakeFiles/PEA_2.dir/PEA_2/Utils/Presentation/Menu.cpp.obj CMakeFiles/PEA_2.dir/PEA_2/Utils/Reader/FileReader.cpp.obj CMakeFiles/PEA_2.dir/PEA_2/Utils/Timer/TimeCounter.cpp.obj CMakeFiles/PEA_2.dir/PEA_2/Utils/CityMatrix/AdjacencyMatrix.cpp.obj CMakeFiles/PEA_2.dir/PEA_2/Algorithms/TabuSearch/TabuSearchImplementation.cpp.obj CMakeFiles/PEA_2.dir/PEA_2/Algorithms/SimulatedAnnealing/SimulatedAnnealing.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\PEA_1.dir
+  OBJECT_DIR = CMakeFiles\PEA_2.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = PEA_1.exe
-  TARGET_IMPLIB = libPEA_1.dll.a
-  TARGET_PDB = PEA_1.exe.dbg
+  TARGET_FILE = PEA_2.exe
+  TARGET_IMPLIB = libPEA_2.dll.a
+  TARGET_PDB = PEA_2.exe.dbg
 
 
 #############################################
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Jakub\CLionProjects\PEA_1\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.3.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\Jakub\CLionProjects\PEA_2\PEA_2\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.3.2\bin\cmake\win\x64\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -137,7 +125,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\Jakub\CLionProjects\PEA_1\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.3.2\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SC:\Users\Jakub\CLionProjects\PEA_1 -BC:\Users\Jakub\CLionProjects\PEA_1\cmake-build-debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\Jakub\CLionProjects\PEA_2\PEA_2\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.3.2\bin\cmake\win\x64\bin\cmake.exe" --regenerate-during-build -SC:\Users\Jakub\CLionProjects\PEA_2\PEA_2 -BC:\Users\Jakub\CLionProjects\PEA_2\PEA_2\cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -147,7 +135,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build PEA_1: phony PEA_1.exe
+build PEA_2: phony PEA_2.exe
 
 # =============================================================================
 # Folder targets.
@@ -155,9 +143,9 @@ build PEA_1: phony PEA_1.exe
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/Jakub/CLionProjects/PEA_1/cmake-build-debug
+# Folder: C:/Users/Jakub/CLionProjects/PEA_2/PEA_2/cmake-build-debug
 
-build all: phony PEA_1.exe
+build all: phony PEA_2.exe
 
 # =============================================================================
 # Built-in targets
@@ -166,14 +154,14 @@ build all: phony PEA_1.exe
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/WindowsPaths.cmake C$:/Users/Jakub/CLionProjects/PEA_1/CMakeLists.txt CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeCXXCompiler.cmake CMakeFiles/3.24.2/CMakeRCCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/WindowsPaths.cmake C$:/Users/Jakub/CLionProjects/PEA_2/PEA_2/CMakeLists.txt CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeCXXCompiler.cmake CMakeFiles/3.24.2/CMakeRCCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/WindowsPaths.cmake C$:/Users/Jakub/CLionProjects/PEA_1/CMakeLists.txt CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeCXXCompiler.cmake CMakeFiles/3.24.2/CMakeRCCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake: phony
+build C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2022.3.2/bin/cmake/win/x64/share/cmake-3.24/Modules/Platform/WindowsPaths.cmake C$:/Users/Jakub/CLionProjects/PEA_2/PEA_2/CMakeLists.txt CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeCXXCompiler.cmake CMakeFiles/3.24.2/CMakeRCCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake: phony
 
 
 #############################################

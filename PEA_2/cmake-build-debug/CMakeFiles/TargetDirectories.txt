@@ -1,3 +1,3 @@
-C:/Users/Jakub/CLionProjects/PEA_1/cmake-build-debug/CMakeFiles/PEA_1.dir
-C:/Users/Jakub/CLionProjects/PEA_1/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Jakub/CLionProjects/PEA_1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/Jakub/CLionProjects/PEA_2/PEA_2/cmake-build-debug/CMakeFiles/PEA_2.dir
+C:/Users/Jakub/CLionProjects/PEA_2/PEA_2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Jakub/CLionProjects/PEA_2/PEA_2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
