@@ -6,8 +6,22 @@
 #define PEA_2_SIMULATEDANNEALING_H
 
 
+#include <vector>
+
 class SimulatedAnnealing {
 
+    int calculateTotalCost(const std::vector<int> &path, const std::vector<std::vector<int>> &costMatrix);
+
+    std::vector<int> generateNewPath(std::vector<int> currentPath);
+
+public:
+    std::vector<int>
+    simulatedAnnealing(const std::vector<std::vector<int>> &costMatrix, double temperature, double coolingRate,
+                       int coolingScheme);
+
+    void displayResult(std::vector<int> bestPath, std::vector<std::vector<int>> costMatrix);
+
+    void displayFinalTemperatureInfo(double temperature);
 };
 
 

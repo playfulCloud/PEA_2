@@ -9,6 +9,7 @@
 
 #include "../Reader/FileReader.h"
 #include "../../Algorithms/TabuSearch/TabuSearchImplementation.h"
+#include "../../Algorithms/SimulatedAnnealing/SimulatedAnnealing.h"
 
 
 class Menu {
@@ -18,6 +19,7 @@ public:
     void displayAlgorithms(std::vector<std::vector<int>> graph);
     FileReader *fileReader;
     TabuSearchImplementation *tabuSearchImplementation;
+    SimulatedAnnealing *simulatedAnnealing;
     std::vector<std::vector<int>> graph;
     void doTests(int num_cities, std::string file, int number_of_tests);
 };

@@ -66,17 +66,20 @@ void Menu::displayAlgorithms(std::vector<std::vector<int>> graph) {
 
                 tabuSearchImplementation = new TabuSearchImplementation(graph,timeLimit,neighbor);
                 tabuSearchImplementation->solve();
-
                 break;
             case 2:
+                int coolingScheme;
 
-                break;
-            case 3:
-                break;
-            case 4:
+                std::cout << "Please enter the Cooling scheme: " << std::endl;
+                std::cout << "1 - Geometrical  " << std::endl;
+                std::cout << "2 - Linear " << std::endl;
+                std::cout << "3 - Logarithmic " << std::endl;
+                std::cin >> coolingScheme;
 
+                simulatedAnnealing = new SimulatedAnnealing();
+                std::vector<int> path = simulatedAnnealing->simulatedAnnealing(graph,10000,0.999,1);
+                simulatedAnnealing->displayResult(path,graph);
                 break;
-
         }
     }
 }

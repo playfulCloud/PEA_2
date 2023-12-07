@@ -74,3 +74,15 @@
 1047	1761	7235590475364558	PEA_2.exe	7f711076ce5c1258
 4	976	7235595277767250	CMakeFiles/PEA_2.dir/PEA_2/Algorithms/TabuSearch/TabuSearchImplementation.cpp.obj	343990a625811fc1
 976	1705	7235595285014350	PEA_2.exe	7f711076ce5c1258
+14	3268	7236433501481450	CMakeFiles/PEA_2.dir/main.cpp.obj	aa410b51d2b23cc5
+376	3291	7236433501695995	CMakeFiles/PEA_2.dir/PEA_2/Algorithms/SimulatedAnnealing/SimulatedAnnealing.cpp.obj	aef724aa1fe9762d
+4	1059	7236433777913520	CMakeFiles/PEA_2.dir/PEA_2/Utils/Presentation/Menu.cpp.obj	5a0aea1cb18e8536
+1059	2737	7236433794655755	PEA_2.exe	7f711076ce5c1258
+4	1059	7236434340367078	CMakeFiles/PEA_2.dir/PEA_2/Utils/Presentation/Menu.cpp.obj	5a0aea1cb18e8536
+1060	1836	7236434348073654	PEA_2.exe	7f711076ce5c1258
+4	867	7236450024979176	CMakeFiles/PEA_2.dir/PEA_2/Algorithms/SimulatedAnnealing/SimulatedAnnealing.cpp.obj	aef724aa1fe9762d
+868	1647	7236450032726272	PEA_2.exe	7f711076ce5c1258
+4	686	7236465589745155	CMakeFiles/PEA_2.dir/main.cpp.obj	aa410b51d2b23cc5
+11	1070	7236465593605028	CMakeFiles/PEA_2.dir/PEA_2/Algorithms/SimulatedAnnealing/SimulatedAnnealing.cpp.obj	aef724aa1fe9762d
+8	1365	7236465596547482	CMakeFiles/PEA_2.dir/PEA_2/Utils/Presentation/Menu.cpp.obj	5a0aea1cb18e8536
+1366	2095	7236465603784534	PEA_2.exe	7f711076ce5c1258
