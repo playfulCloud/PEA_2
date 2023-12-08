@@ -18,7 +18,7 @@ void Menu::displayMenu() {
     int gate = 0;
     while (gate != 4) {
         std::cout << "Choose what do you want to do: " << std::endl;
-        std::cout << "1 - Read data from XML File" << std::endl;
+        std::cout << "1 - Read data from ATSP File" << std::endl;
         std::cout << "2 - Choose algorithm with read data" << std::endl;
         std::cout << "3 - Tests" << std::endl;
         std::cout << "4 - Exit" << std::endl;
@@ -54,15 +54,16 @@ void Menu::displayAlgorithms(std::vector<std::vector<int>> graph) {
                 std::cout << "Please enter the neighbor type: " << std::endl;
                 std::cout << "1 - Swap " << std::endl;
                 std::cout << "2 - Insert " << std::endl;
-                std::cout << "2 - Inverse " << std::endl;
+                std::cout << "3 - Inverse " << std::endl;
                 std::cin >> neighbor;
 
                 std::cout << "Neighbor accepted! " << std::endl;
                 std::cout << "" << std::endl;
                 std::cout << "" << std::endl;
 
-                std::cout << "Please enter the ms time limit: " << std::endl;
+                std::cout << "Please enter the s time limit: " << std::endl;
                 std::cin >> timeLimit;
+                timeLimit = timeLimit*1000;
 
                 tabuSearchImplementation = new TabuSearchImplementation(graph,timeLimit,neighbor);
                 tabuSearchImplementation->solve();
@@ -76,8 +77,12 @@ void Menu::displayAlgorithms(std::vector<std::vector<int>> graph) {
                 std::cout << "3 - Logarithmic " << std::endl;
                 std::cin >> coolingScheme;
 
+                std::cout << "Please enter the s time limit: " << std::endl;
+                std::cin >> timeLimit;
+                timeLimit = timeLimit*1000;
+
                 simulatedAnnealing = new SimulatedAnnealing();
-                std::vector<int> path = simulatedAnnealing->simulatedAnnealing(graph,10000,0.999,1);
+                std::vector<int> path = simulatedAnnealing->simulatedAnnealing(graph,10000,0.999,1,timeLimit);
                 simulatedAnnealing->displayResult(path,graph);
                 break;
         }

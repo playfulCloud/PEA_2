@@ -9,6 +9,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
+#include <chrono>
 
 // Funkcja obliczająca całkowity koszt danej ścieżki
 int SimulatedAnnealing::calculateTotalCost(const std::vector<int>& path, const std::vector<std::vector<int>>& costMatrix) {
@@ -33,7 +34,7 @@ std::vector<int> SimulatedAnnealing::generateNewPath(std::vector<int> currentPat
 }
 
 // Główna funkcja symulowanego wyżarzania
-std::vector<int> SimulatedAnnealing::simulatedAnnealing(const std::vector<std::vector<int>>& costMatrix, double temperature, double coolingRate,int coolingScheme) {
+std::vector<int> SimulatedAnnealing::simulatedAnnealing(const std::vector<std::vector<int>>& costMatrix, double temperature, double coolingRate,int coolingScheme, int maxDuration) {
     srand(time(nullptr));
     int numCities = costMatrix.size();
 
@@ -50,10 +51,20 @@ std::vector<int> SimulatedAnnealing::simulatedAnnealing(const std::vector<std::v
     int iteration = 0; // Dla schematu logarytmicznego
     double linearStep = 10; // Wartość zm
 
+    auto startTime = std::chrono::high_resolution_clock::now();
+
     while (temperature > 1) {
         std::vector<int> newPath = generateNewPath(currentPath);
         int currentCost = calculateTotalCost(currentPath, costMatrix);
         int newCost = calculateTotalCost(newPath, costMatrix);
+
+        auto currentTime = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds >(currentTime - startTime).count();
+
+        if (duration > maxDuration) {
+            std::cout << "Maksymalny czas wykonania przekroczony. Przerywanie..." << std::endl;
+            break;
+        }
 
         // Akceptacja nowej ścieżki
         if (newCost < currentCost || (exp((currentCost - newCost) / temperature) > ((double)rand() / RAND_MAX))) {
@@ -81,6 +92,10 @@ std::vector<int> SimulatedAnnealing::simulatedAnnealing(const std::vector<std::v
                 temperature *= coolingRate;
         };
     }
+    auto endTime = std::chrono::high_resolution_clock::now();
+    auto totalDuration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
+    std::cout << "Całkowity czas wykonania: " << totalDuration << " ms" << std::endl;
+    
     displayFinalTemperatureInfo(temperature);
     return bestPath;
 }

@@ -22,6 +22,10 @@ public:
     void displayResult(std::vector<int> bestPath, std::vector<std::vector<int>> costMatrix);
 
     void displayFinalTemperatureInfo(double temperature);
+
+    std::vector<int>
+    simulatedAnnealing(const std::vector<std::vector<int>> &costMatrix, double temperature, double coolingRate,
+                       int coolingScheme, int maxDuration);
 };
 
 
