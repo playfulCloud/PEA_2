@@ -12,6 +12,8 @@
 class FileReader {
 public:
     std::vector<std::vector<int>> readFromFile();
+
+    std::vector<std::vector<int>> readFromFile2(std::string fileName);
 };
 
 

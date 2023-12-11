@@ -1,10 +1,15 @@
 # ninja log v5
+9	2413	7239592426678612	CMakeFiles/PEA_2.dir/PEA_2/Utils/Presentation/Menu.cpp.obj	5a0aea1cb18e8536
 1	233	7235150722002091	build.ninja	23f16e1e2f9ae299
-250	1781	7236894714188877	CMakeFiles/PEA_2.dir/PEA_2/Utils/Presentation/Menu.cpp.obj	5a0aea1cb18e8536
 6	146	7233937445472679	CMakeFiles/PEA_2.dir/PEA_2/Utils/Timer/TimeCounter.cpp.obj	36fa38f0baee23a0
-6	1078	7236814338640887	CMakeFiles/PEA_2.dir/PEA_2/Algorithms/TabuSearch/TabuSearchImplementation.cpp.obj	343990a625811fc1
-4	1047	7235590468277754	CMakeFiles/PEA_2.dir/PEA_2/Utils/Reader/FileReader.cpp.obj	4a53a8515f3a8773
 9	1794	7235149708490982	CMakeFiles/PEA_2.dir/PEA_2/Utils/CityMatrix/AdjacencyMatrix.cpp.obj	a024bef41436b6ba
-253	1570	7236894712064570	CMakeFiles/PEA_2.dir/PEA_2/Algorithms/SimulatedAnnealing/SimulatedAnnealing.cpp.obj	aef724aa1fe9762d
-4	1504	7236894711406325	CMakeFiles/PEA_2.dir/main.cpp.obj	aa410b51d2b23cc5
-1782	3215	7236894728472004	PEA_2.exe	7f711076ce5c1258
+31	1576	7239447210607338	CMakeFiles/PEA_2.dir/PEA_2/Algorithms/TabuSearch/TabuSearchImplementation.cpp.obj	343990a625811fc1
+5	1329	7238587498080115	CMakeFiles/PEA_2.dir/PEA_2/Utils/Reader/FileReader.cpp.obj	4a53a8515f3a8773
+11	2326	7239592425761066	CMakeFiles/PEA_2.dir/PEA_2/Algorithms/SimulatedAnnealing/SimulatedAnnealing.cpp.obj	aef724aa1fe9762d
+5	1431	7239592416801197	CMakeFiles/PEA_2.dir/main.cpp.obj	aa410b51d2b23cc5
+2414	3218	7239592434679903	PEA_2.exe	7f711076ce5c1258
+6	985	7239595261763923	CMakeFiles/PEA_2.dir/PEA_2/Algorithms/SimulatedAnnealing/SimulatedAnnealing.cpp.obj	aef724aa1fe9762d
+4	934	7239595614450797	CMakeFiles/PEA_2.dir/PEA_2/Utils/Presentation/Menu.cpp.obj	5a0aea1cb18e8536
+936	1654	7239595621577817	PEA_2.exe	7f711076ce5c1258
+5	1325	7239598329108683	CMakeFiles/PEA_2.dir/PEA_2/Algorithms/SimulatedAnnealing/SimulatedAnnealing.cpp.obj	aef724aa1fe9762d
+1326	2036	7239598336180759	PEA_2.exe	7f711076ce5c1258

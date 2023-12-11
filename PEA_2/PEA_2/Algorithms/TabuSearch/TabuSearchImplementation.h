@@ -10,7 +10,9 @@
 
 class TabuSearchImplementation {
 public:
-    TabuSearchImplementation( std::vector<std::vector<int>> matrix,long long int timeLimit,int neighborTypeOperation);
+    TabuSearchImplementation();
+
+    TabuSearchImplementation(std::vector<std::vector<int>> matrix, long long int timeLimit, int neighborTypeOperation);
 
     long millisActualTime;
     long executionTime;
@@ -29,13 +31,14 @@ public:
 
     void insertv2(int i, int j, std::vector<int> &path);
 
-    std::vector<int> generateRandomPath();
 
-    int calculatePathCost(const std::vector<int> &path);
+   std::string solve(std::vector<std::vector<int>> matrix, long long int timeLimit, int neighborTypeOperation);
 
-    void random();
+    std::vector<int> generateRandomPath(std::vector<std::vector<int>> &matrix);
 
-    void solve();
+    int calculatePathCost(const std::vector<int> &path, std::vector<std::vector<int>> &matrix);
+
+    void random(std::vector<std::vector<int>> &matrix);
 };
 
 

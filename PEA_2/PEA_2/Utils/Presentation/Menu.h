@@ -21,7 +21,11 @@ public:
     TabuSearchImplementation *tabuSearchImplementation;
     SimulatedAnnealing *simulatedAnnealing;
     std::vector<std::vector<int>> graph;
-    void doTests(int num_cities, std::string file, int number_of_tests);
+
+    void doTests1(std::vector<std::vector<int>> graph, std::string fileToRead, int type, int timeLimit);
+    void
+    doTests2(std::vector<std::vector<int>> graph, std::string fileToWrite, int type, int timeLimit, double temperature,
+             double coolingRate);
 };
 
 

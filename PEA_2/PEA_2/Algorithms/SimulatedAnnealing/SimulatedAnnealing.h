@@ -7,6 +7,7 @@
 
 
 #include <vector>
+#include <string>
 
 class SimulatedAnnealing {
 
@@ -26,6 +27,21 @@ public:
     std::vector<int>
     simulatedAnnealing(const std::vector<std::vector<int>> &costMatrix, double temperature, double coolingRate,
                        int coolingScheme, int maxDuration);
+
+    std::__cxx11::basic_string<char>
+    resultForTest(int totalDuration, std::vector<int> bestPath, std::vector<std::vector<int>> costMatrix);
+
+    std::string
+    simulatedAnnealing2(const std::vector<std::vector<int>> &costMatrix, double temperature, double coolingRate,
+                        int coolingScheme, int maxDuration);
+
+
+    std::vector<int> generateNeighbor(const std::vector<int> &currentPath);
+
+
+    std::vector<int> simulatedAnnealing3(const std::vector<std::vector<int>> &distances);
+
+    double calculateCost2(const std::vector<std::vector<int>> &distances, const std::vector<int> &path);
 };
 
 

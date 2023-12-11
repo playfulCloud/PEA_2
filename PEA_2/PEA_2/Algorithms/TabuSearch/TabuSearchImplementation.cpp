@@ -8,59 +8,62 @@
 #include "TabuSearchImplementation.h"
 #include <random>
 
-TabuSearchImplementation::TabuSearchImplementation(std::vector<std::vector<int>> matrix, long long int timeLimit,
-                                                   int neighborTypeOperation) {
-    this->matrix = matrix;
-    this->timeLimit = timeLimit;
-    this->neighborTypeOperation = neighborTypeOperation;
+TabuSearchImplementation::TabuSearchImplementation() {
+
 }
 
-void TabuSearchImplementation::solve() {
-    std::vector<int> currentPath;
-    std::vector<int> nextPath;
+std::string TabuSearchImplementation::solve(std::vector<std::vector<int>> matrix, long long int timeLimit,
+                                     int neighborTypeOperation) {
+    std::vector<int> currentPath, nextPath, savePath;
     std::vector<std::vector<int>> tabuMatrix(matrix.size(), std::vector<int>(matrix.size(), 0));
-    int iterations = 10 * matrix.size(); // liczba iteracji to 10 krotność liczby miast
-    int nextCost;
-    int currentCost;
-    std::vector<int> savePath;
-    bestCost = INT_MAX;
+    int iterations = 10 * matrix.size();
+    int nextCost, currentCost;
     auto millisActualTime = std::chrono::high_resolution_clock::now();
 
+    int resetTabuCounter = 0;
+    const int resetTabuInterval = 100;  // Co ile iteracji resetować część macierzy tabu
+
     while (true) {
-        currentPath = generateRandomPath();
+        currentPath = generateRandomPath(matrix);
         nextPath = currentPath;
-        currentCost = calculatePathCost(currentPath);
+        currentCost = calculatePathCost(currentPath,matrix);
+
         for (int a = 0; a < iterations; a++) {
-            currentPath = nextPath; // kopiowanie wektorów
+            currentPath = nextPath;
             nextCost = currentCost;
-            savePath = currentPath; // zachowanie ścieżki
+            savePath = currentPath;
+
             for (size_t i = 1; i < matrix.size(); i++) {
                 for (size_t j = i + 1; j < matrix.size(); j++) {
                     if (neighborTypeOperation == 1) {
                         swap(i, j, currentPath);
                     } else if (neighborTypeOperation == 2) {
-                        insertv2(i, j, currentPath);
+                        insert(i, j, currentPath);
                     } else if (neighborTypeOperation == 3) {
                         makeReverse(i, j, currentPath);
                     }
-                    currentCost = calculatePathCost(currentPath);
+
+                    currentCost = calculatePathCost(currentPath,matrix);
 
                     if (currentCost < bestCost) {
                         bestPath = currentPath;
                         bestCost = currentCost;
                         bestSolutionTime = std::chrono::duration_cast<std::chrono::milliseconds>(
                                 std::chrono::high_resolution_clock::now() - millisActualTime).count();
+
                         if (tabuMatrix[i][j] == 0) {
                             nextCost = currentCost;
                             nextPath = currentPath;
                         }
                     }
+
                     if (currentCost < nextCost && tabuMatrix[i][j] < a) {
                         nextCost = currentCost;
                         nextPath = currentPath;
                         tabuMatrix[i][j] += matrix.size();
                     }
-                    currentPath = savePath; // przywrócenie ścieżki
+
+                    currentPath = savePath;
                 }
             }
 
@@ -72,7 +75,20 @@ void TabuSearchImplementation::solve() {
                 }
             }
 
-            auto currentTime =  std::chrono::high_resolution_clock::now();
+            // Resetowanie macierzy tabu co określoną liczbę iteracji
+            if (resetTabuCounter >= resetTabuInterval) {
+                for (size_t x = 0; x < matrix.size(); x++) {
+                    for (size_t y = 0; y < matrix.size(); y++) {
+                        if (rand() % 2) {  // 50% szans na reset wartości tabu
+                            tabuMatrix[x][y] = 0;
+                        }
+                    }
+                }
+                resetTabuCounter = 0;
+            }
+            resetTabuCounter++;
+
+            auto currentTime = std::chrono::high_resolution_clock::now();
             executionTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - millisActualTime).count();
             if (executionTime > timeLimit) {
                 std::cout << bestCost << "\n";
@@ -81,7 +97,8 @@ void TabuSearchImplementation::solve() {
                 }
                 std::cout << "0\n";
                 std::cout << "Najlepsze rozwiązanie znaleziono w: " << bestSolutionTime << " ms\n";
-                return;
+                std::string result =  std::to_string(bestCost) + ";" + std::to_string(bestSolutionTime);
+                return result;
             }
         }
     }
@@ -91,8 +108,6 @@ void TabuSearchImplementation::swap(int i, int j, std::vector<int>& path) {
     path[i] = path[j];
     path[j] = temp;
 }
-
-// Przykładowa implementacja metody makeReverse
 void  TabuSearchImplementation::makeReverse(int i, int j, std::vector<int>& path) {
     while (i < j) {
         int temp = path[i];
@@ -130,7 +145,7 @@ void TabuSearchImplementation::insertv2(int i, int j, std::vector<int>& path) {
     path = tempTab; // kopiowanie wektora
 }
 
-std::vector<int> TabuSearchImplementation::generateRandomPath() {
+std::vector<int> TabuSearchImplementation::generateRandomPath(std::vector<std::vector<int>>& matrix) {
     std::vector<int> randomPath(matrix.size());
     for (size_t i = 0; i < matrix.size(); i++) {
         randomPath[i] = i;
@@ -145,7 +160,7 @@ std::vector<int> TabuSearchImplementation::generateRandomPath() {
 }
 
 // Funkcja obliczająca koszt ścieżki
-int TabuSearchImplementation::calculatePathCost(const std::vector<int>& path) {
+int TabuSearchImplementation::calculatePathCost(const std::vector<int>& path, std::vector<std::vector<int>>& matrix) {
     int cost = 0;
     for (size_t i = 0; i < path.size() - 1; i++) {
         cost += matrix[path[i]][path[i + 1]];
@@ -155,14 +170,14 @@ int TabuSearchImplementation::calculatePathCost(const std::vector<int>& path) {
 }
 
 // Funkcja testująca losowe ścieżki
-void TabuSearchImplementation::random() {
+void TabuSearchImplementation::random(std::vector<std::vector<int>>& matrix) {
     std::chrono::high_resolution_clock::time_point millisActualTime;
     millisActualTime = std::chrono::high_resolution_clock::now();
     std::vector<int> currentPath;
     int currentCost;
     while (true) {
-        currentPath = generateRandomPath();
-        currentCost = calculatePathCost(currentPath);
+        currentPath = generateRandomPath(matrix);
+        currentCost = calculatePathCost(currentPath,matrix);
         if (currentCost < bestCost) {
             bestPath = currentPath;
             bestCost = currentCost;
