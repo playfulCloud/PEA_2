@@ -11,37 +11,41 @@
 
 class SimulatedAnnealing {
 
-    int calculateTotalCost(const std::vector<int> &path, const std::vector<std::vector<int>> &costMatrix);
 
-    std::vector<int> generateNewPath(std::vector<int> currentPath);
 
 public:
+
+    std::vector<int> initializeTour(int n);
+
+
+
+    void displaySolution(const std::vector<int> &tour, const std::vector<std::vector<int>> &cities);
+
+
+
+    int calculatePathCost(const std::vector<int> &path, std::vector<std::vector<int>> matrix);
+
     std::vector<int>
-    simulatedAnnealing(const std::vector<std::vector<int>> &costMatrix, double temperature, double coolingRate,
-                       int coolingScheme);
+    simulatedAnnealing(const std::vector<std::vector<int>> &cities, double initialTemperature, double coolingRate,
+                       int epochs, int coolingScheme, int timeLimit);
 
-    void displayResult(std::vector<int> bestPath, std::vector<std::vector<int>> costMatrix);
 
-    void displayFinalTemperatureInfo(double temperature);
-
-    std::vector<int>
-    simulatedAnnealing(const std::vector<std::vector<int>> &costMatrix, double temperature, double coolingRate,
-                       int coolingScheme, int maxDuration);
-
-    std::__cxx11::basic_string<char>
-    resultForTest(int totalDuration, std::vector<int> bestPath, std::vector<std::vector<int>> costMatrix);
+    void
+    savePathToFile(const std::vector<int> &path, double pathCost, long long int executionTime,
+                   const std::string &fileName,
+                   int coolingScheme);
 
     std::string
-    simulatedAnnealing2(const std::vector<std::vector<int>> &costMatrix, double temperature, double coolingRate,
-                        int coolingScheme, int maxDuration);
+    simulatedAnnealingForTesting(const std::vector<std::vector<int>> &cities, double initialTemperature,
+                                 double coolingRate,
+                                 int epochs, int coolingScheme, int timeLimit);
+
+    long long int
+    writeCurrentBestSolutionAndTimeToFile(const std::vector<std::vector<int>> &cities, const std::vector<int> &path,
+                                          long long int executionTime, const std::string &fileName, int timeLimit,
+                                          int coolingScheme, int epochs);
 
 
-    std::vector<int> generateNeighbor(const std::vector<int> &currentPath);
-
-
-    std::vector<int> simulatedAnnealing3(const std::vector<std::vector<int>> &distances);
-
-    double calculateCost2(const std::vector<std::vector<int>> &distances, const std::vector<int> &path);
 };
 
 

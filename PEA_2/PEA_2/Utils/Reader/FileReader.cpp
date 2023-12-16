@@ -65,14 +65,14 @@ std::vector<std::vector<int>> FileReader::readFromFile() {
     file.close();
 
 
-    // Opcjonalne: Drukowanie macierzy sąsiedztwa
-    for (const auto &row : adjacencyMatrix) {
-        for (int weight : row) {
-            std::cout << weight << "\t";
-        }
-        std::cout << std::endl;
-    }
-
+//    // Opcjonalne: Drukowanie macierzy sąsiedztwa
+//    for (const auto &row : adjacencyMatrix) {
+//        for (int weight : row) {
+//            std::cout << weight << "\t";
+//        }
+//        std::cout << std::endl;
+//    }
+    std::cout << "File has been read" << std::endl;
     return adjacencyMatrix;
 }
 

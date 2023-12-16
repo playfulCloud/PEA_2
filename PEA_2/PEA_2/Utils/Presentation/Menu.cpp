@@ -31,39 +31,20 @@ void Menu::displayMenu() {
                 displayAlgorithms(graph);
                 break;
             case 3:
-
                 std::vector<std::vector<int>> graph = fileReader->readFromFile2("ftv55.atsp");
 
-//////                doTests1(graph,"tb1_1.txt",1,120);
-////                doTests1(graph,"tb1_2.txt",2,120);
-////                doTests1(graph,"tb1_3.txt",3,120);
 //
 //                graph = fileReader->readFromFile2("ftv170.atsp");
-////
-//////                doTests1(graph,"tb2_1.txt",1,240);
-//////                doTests1(graph,"tb2_2.txt",2,240);
-//                doTests1(graph,"tb2_3.txt",3,240);
-
-//                graph = fileReader->readFromFile2("rbg358.atsp");
-
-
-
-//               doTests2(graph,"sa1_1.txt",1,120,100,0.9999993);
-//               doTests2(graph,"sa1_2.txt",2,120,10000,0.9999);
-//               doTests2(graph,"sa1_3.txt",3,120,1000,0.95);
-
-
-                graph = fileReader->readFromFile2("ftv170.atsp");
-
-               doTests2(graph,"sa2_1.txt",1,240,100000,0.999999);
-//                doTests2(graph,"sa1_2.txt",2,240,1000000,0.999);
-//                doTests2(graph,"sa2_3.txt",3,240,1000000,0.999);
-
-                graph = fileReader->readFromFile2("ftv358.atsp");
 //
-//             doTests2(graph,"sa3_1.txt",1,360,300,0.9999993);
-//                doTests2(graph,"sa3_2.txt",2,360,1000000,0.999);
-//                doTests2(graph,"sa3_3.txt",3,360,1000000,0.999);
+//                doAllLogarythmicTests(graph,"sa2_3.txt",3,240000,80,500);
+
+
+                graph = fileReader->readFromFile2("rbg358.atsp");
+
+//                doAllGeometricTests(graph,"sa3_1.txt",1,360000);
+                doAllLinearTests(graph,"sa3_2.txt",2,360000,50);
+                doAllLogarythmicTests(graph,"sa3_3.txt",3,360000,10,500);
+
 
 
                 break;
@@ -116,35 +97,35 @@ void Menu::displayAlgorithms(std::vector<std::vector<int>> graph) {
                 timeLimit = timeLimit*1000;
 
                 simulatedAnnealing = new SimulatedAnnealing();
-                std::vector<int> path = simulatedAnnealing->simulatedAnnealing(graph,10000,0.999999,coolingScheme,timeLimit);
-                simulatedAnnealing->displayResult(path,graph);
+                std::vector<int> path = simulatedAnnealing->simulatedAnnealing(graph,10,0.99,500 ,coolingScheme,timeLimit);
+//                simulatedAnnealing->displaySolution(path,graph);
                 break;
         }
     }
 }
 
 
-void Menu::doTests1(std::vector<std::vector<int>> graph,std::string fileToWrite, int type, int timeLimit) {
-    std::filesystem::path projectPath = std::filesystem::current_path();
-    projectPath = projectPath.parent_path(); // Uzyskanie ścieżki do katalogu nadrzędnego
-    std::string filePath = projectPath.string() + "\\PEA_2\\data\\" + fileToWrite;
-    std::cout << filePath;
-    std::ofstream fileStream(filePath);
+//void Menu::doTests1(std::vector<std::vector<int>> graph,std::string fileToWrite, int type, int timeLimit) {
+//    std::filesystem::path projectPath = std::filesystem::current_path();
+//    projectPath = projectPath.parent_path(); // Uzyskanie ścieżki do katalogu nadrzędnego
+//    std::string filePath = projectPath.string() + "\\PEA_2\\data\\" + fileToWrite;
+//    std::cout << filePath;
+//    std::ofstream fileStream(filePath);
+//
+//    for (int i = 0; i < 10; i++) {
+//        if (fileStream.is_open()) {
+//            tabuSearchImplementation = new TabuSearchImplementation();
+//            std::string answer = tabuSearchImplementation->solve(graph, timeLimit*1000, type);
+//            fileStream << answer + "\n";
+//            std::cout << "skonczony" << std::endl;
+//        } else {
+//            std::cerr << "Error opening file: " << fileToWrite << std::endl;
+//        }
+//    }
+//}
 
-    for (int i = 0; i < 10; i++) {
-        if (fileStream.is_open()) {
-            tabuSearchImplementation = new TabuSearchImplementation();
-            std::string answer = tabuSearchImplementation->solve(graph, timeLimit*1000, type);
-            fileStream << answer + "\n";
-            std::cout << "skonczony" << std::endl;
-        } else {
-            std::cerr << "Error opening file: " << fileToWrite << std::endl;
-        }
-    }
-}
 
-
-void Menu::doTests2(std::vector<std::vector<int>> graph,std::string fileToWrite, int type, int timeLimit, double temperature,double coolingRate) {
+void Menu::doAllGeometricTests(std::vector<std::vector<int>> graph,std::string fileToWrite, int type, int timeLimit) {
     std::filesystem::path projectPath = std::filesystem::current_path();
     projectPath = projectPath.parent_path(); // Uzyskanie ścieżki do katalogu nadrzędnego
     std::string filePath = projectPath.string() + "\\PEA_2\\data\\" + fileToWrite;
@@ -154,7 +135,7 @@ void Menu::doTests2(std::vector<std::vector<int>> graph,std::string fileToWrite,
     for (int i = 0; i < 10; i++) {
         if (fileStream.is_open()) {
             simulatedAnnealing = new SimulatedAnnealing();
-           std::string answer = simulatedAnnealing->simulatedAnnealing2(graph,temperature,coolingRate,type,timeLimit*1000);
+            std::string answer = simulatedAnnealing->simulatedAnnealingForTesting(graph,80,0.99,1000 ,type,timeLimit);
             fileStream << answer + "\n";
             std::cout << "skonczony" << std::endl;
             delete simulatedAnnealing;
@@ -164,7 +145,45 @@ void Menu::doTests2(std::vector<std::vector<int>> graph,std::string fileToWrite,
     }
 }
 
+void Menu::doAllLinearTests(std::vector<std::vector<int>> graph,std::string fileToWrite, int type, int timeLimit,double temperature) {
+    std::filesystem::path projectPath = std::filesystem::current_path();
+    projectPath = projectPath.parent_path(); // Uzyskanie ścieżki do katalogu nadrzędnego
+    std::string filePath = projectPath.string() + "\\PEA_2\\data\\" + fileToWrite;
+    std::cout << filePath;
+    std::ofstream fileStream(filePath);
 
+    for (int i = 0; i < 10; i++) {
+        if (fileStream.is_open()) {
+            simulatedAnnealing = new SimulatedAnnealing();
+            std::string answer = simulatedAnnealing->simulatedAnnealingForTesting(graph,temperature,0.99,9000 ,type,timeLimit);
+            fileStream << answer + "\n";
+            std::cout << "skonczony" << std::endl;
+            delete simulatedAnnealing;
+        } else {
+            std::cerr << "Error opening file: " << fileToWrite << std::endl;
+        }
+    }
+}
+
+void Menu::doAllLogarythmicTests(std::vector<std::vector<int>> graph,std::string fileToWrite, int type, int timeLimit,double temperature, int epochs) {
+    std::filesystem::path projectPath = std::filesystem::current_path();
+    projectPath = projectPath.parent_path(); // Uzyskanie ścieżki do katalogu nadrzędnego
+    std::string filePath = projectPath.string() + "\\PEA_2\\data\\" + fileToWrite;
+    std::cout << filePath;
+    std::ofstream fileStream(filePath);
+
+    for (int i = 0; i < 10; i++) {
+        if (fileStream.is_open()) {
+            simulatedAnnealing = new SimulatedAnnealing();
+            std::string answer = simulatedAnnealing->simulatedAnnealingForTesting(graph,temperature,0.99,epochs ,type,timeLimit);
+            fileStream << answer + "\n";
+            std::cout << "skonczony" << std::endl;
+            delete simulatedAnnealing;
+        } else {
+            std::cerr << "Error opening file: " << fileToWrite << std::endl;
+        }
+    }
+}
 
 
 

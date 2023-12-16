@@ -22,10 +22,22 @@ public:
     SimulatedAnnealing *simulatedAnnealing;
     std::vector<std::vector<int>> graph;
 
-    void doTests1(std::vector<std::vector<int>> graph, std::string fileToRead, int type, int timeLimit);
+
     void
     doTests2(std::vector<std::vector<int>> graph, std::string fileToWrite, int type, int timeLimit, double temperature,
              double coolingRate);
+
+
+
+    void doAllGeometricTests(std::vector<std::vector<int>> graph, std::string fileToWrite, int type, int timeLimit);
+
+    void doAllLinearTests(std::vector<std::vector<int>> graph, std::string fileToWrite, int type, int timeLimit,
+                          double temperature);
+
+
+
+    void doAllLogarythmicTests(std::vector<std::vector<int>> graph, std::string fileToWrite, int type, int timeLimit,
+                               double temperature, int epochs);
 };
 
 

@@ -1,203 +1,320 @@
-//
-// Created by Jakub on 04.12.2023.
-//
-
-#include "SimulatedAnnealing.h"
-#include <iostream>
 #include <vector>
-#include <algorithm>
+#include <iostream>
 #include <cmath>
-#include <cstdlib>
-#include <ctime>
-#include <chrono>
 #include <random>
+#include <algorithm>
+#include <chrono>
+#include "SimulatedAnnealing.h"
+#include <fstream>
+#include <filesystem>
 
 
-int SimulatedAnnealing::calculateTotalCost(const std::vector<int>& path, const std::vector<std::vector<int>>& costMatrix) {
-    int totalCost = 0;
-    for (size_t i = 0; i < path.size() - 1; ++i) {
-        totalCost += costMatrix[path[i]][path[i + 1]];
+int SimulatedAnnealing::calculatePathCost(const std::vector<int> &path, std::vector<std::vector<int>> matrix) {
+    int cost = 0;
+    for (size_t i = 0; i < path.size() - 1; i++) {
+        cost += matrix[path[i]][path[i + 1]];
     }
-    // Adding the cost of returning to the starting city
-    totalCost += costMatrix[path.back()][path.front()];
-    return totalCost;
+    cost += matrix[path.back()][path[0]];
+    return cost;
 }
 
-// Funkcja generująca nową ścieżkę poprzez zamianę dwóch losowych miast
-std::vector<int> SimulatedAnnealing::generateNewPath(std::vector<int> currentPath) {
+std::vector<int> SimulatedAnnealing::initializeTour(int n) {
+    std::vector<int> tour(n);
+    for (int i = 0; i < n; ++i) {
+        tour[i] = i;
+    }
     std::random_device rd;
     std::mt19937 g(rd());
-    std::uniform_int_distribution<> dist(0, currentPath.size() - 1);
-
-    int index1 = dist(g);
-    int index2 = dist(g);
-    while (index1 == index2) {
-        index2 = dist(g);
-    }
-
-    std::reverse(currentPath.begin() + std::min(index1, index2), currentPath.begin() + std::max(index1, index2) + 1);
-    return currentPath;
+    std::shuffle(tour.begin() + 1, tour.end(), g);
+    return tour;
 }
 
-// Główna funkcja symulowanego wyżarzania
-std::vector<int> SimulatedAnnealing::simulatedAnnealing(const std::vector<std::vector<int>>& costMatrix, double temperature, double coolingRate,int coolingScheme, int maxDuration) {
-    std::random_device rd;
-    std::mt19937 g(rd());
-    int numCities = costMatrix.size();
-
-    // Inicjalizacja początkowej ścieżki
-    std::vector<int> currentPath(numCities);
-    for (int i = 0; i < numCities; ++i) {
-        currentPath[i] = i;
+std::vector<int>
+SimulatedAnnealing::simulatedAnnealing(const std::vector<std::vector<int>> &cities, double initialTemperature,
+                                       double coolingRate, int epochs, int coolingScheme, int timeLimit) {
+    if (cities.empty()) {
+        throw std::invalid_argument("Cities vector cannot be empty.");
     }
-    std::shuffle(currentPath.begin(), currentPath.end(), g);
 
-    std::vector<int> bestPath = currentPath;
-    int bestCost = calculateTotalCost(currentPath, costMatrix);
+    int n = cities.size();
+    std::vector<int> currentTour = initializeTour(n);
+    std::vector<int> bestTour = currentTour;
 
-    int iteration = 0; // Dla schematu logarytmicznego
-    double linearStep = 5; // Wartość zm
+    double currentLength = calculatePathCost(currentTour, cities);
+    double bestLength = currentLength;
+    double temperature = initialTemperature;
 
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, n - 1);
     auto startTime = std::chrono::high_resolution_clock::now();
-
+    int epochCounter = 0;
     while (temperature > 0.5) {
-        std::vector<int> newPath = generateNewPath(currentPath);
-        int currentCost = calculateTotalCost(currentPath, costMatrix);
-        int newCost = calculateTotalCost(newPath, costMatrix);
 
+        for (int epoch = 0; epoch < epochs; ++epoch) {
+            std::vector<int> newTour = currentTour;
+            int pos1 = dis(gen);
+            int pos2 = dis(gen);
+            std::swap(newTour[pos1], newTour[pos2]);
+
+            double newLength = calculatePathCost(newTour, cities);
+            double deltaLength = newLength - currentLength;
+
+            if (deltaLength < 0 || (std::generate_canonical<double, 10>(gen)) < std::exp(-deltaLength / temperature)) {
+                currentTour = newTour;
+                currentLength = newLength;
+
+                if (currentLength < bestLength) {
+                    bestTour = currentTour;
+                    bestLength = currentLength;
+                }
+            }
+
+
+        }
         auto currentTime = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::milliseconds >(currentTime - startTime).count();
-
-        if (duration > maxDuration) {
-            std::cout << "Maksymalny czas wykonania przekroczony. Przerywanie..." << std::endl;
-            break;
+        auto workTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - startTime).count();
+        if (workTime > timeLimit) {
+            std::cout << "Pogram zostal zakonczony przed czasem! " << std::endl;
+            auto endTime = std::chrono::high_resolution_clock::now();
+            auto executionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
+            std::cout << "Execution time: " << executionTime << std::endl;
+            displaySolution(bestTour, cities);
+            savePathToFile(bestTour, calculatePathCost(bestTour, cities), executionTime, "sciezki.txt", coolingScheme);
+            return bestTour;
         }
-
-        // Akceptacja nowej ścieżki
-        if (newCost < currentCost || (exp((currentCost - newCost) / temperature) > ((double)rand() / RAND_MAX))) {
-            currentPath = newPath;
-        }
-
-        if (newCost < bestCost) {
-            bestPath = newPath;
-            bestCost = newCost;
-        }
+        double linearStep = 0.40;
 
         switch (coolingScheme) {
-            case 1: // Geometryczne
+            case 1:
                 temperature *= coolingRate;
                 break;
-            case 2: // Liniowe
-                temperature -= temperature *coolingRate;
-                break;
-            case 3: // Logarytmiczne
-                temperature = temperature / ( log(2 + iteration));
-                iteration++;
-                break;
-            default:
-                // Domyślnie użyjemy schładzania geometrycznego
-                temperature *= coolingRate;
-        };
-    }
-    auto endTime = std::chrono::high_resolution_clock::now();
-    auto totalDuration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
-//    std::cout << "Całkowity czas wykonania: " << totalDuration << " ms" << std::endl;
-
-    displayFinalTemperatureInfo(temperature);
-    return bestPath;
-}
-
-void SimulatedAnnealing::displayResult(std::vector<int> bestPath, std::vector<std::vector<int>>costMatrix) {
-//    double temperature = 10000;
-//    double coolingRate = 0.999;
-
-
-    std::cout << "Best path: ";
-    for (int city : bestPath) {
-        std::cout << city << " ";
-    }
-    std::cout << bestPath[0];
-    std::cout << "\nprice: " << calculateTotalCost(bestPath, costMatrix) << std::endl;
-
-}
-
-void SimulatedAnnealing::displayFinalTemperatureInfo(double temperature) {
-    std::cout << "Final Temperature (Tk): " << temperature << std::endl;
-    std::cout << "Value of exp(-1/Tk): " << std::exp(-1 / temperature) << std::endl;
-}
-
-std::string SimulatedAnnealing::resultForTest(int totalDuration,std::vector<int> bestPath, std::vector<std::vector<int>>costMatrix ){
-   std::string result =  std::to_string(calculateTotalCost(bestPath,costMatrix)) + ";" + std::to_string(totalDuration)  ;
-    return result;
-}
-
-// Główna funkcja symulowanego wyżarzania
-std::string SimulatedAnnealing::simulatedAnnealing2(const std::vector<std::vector<int>>& costMatrix, double temperature, double coolingRate,int coolingScheme, int maxDuration) {
-    srand(time(nullptr));
-    int numCities = costMatrix.size();
-
-    // Inicjalizacja początkowej ścieżki
-    std::vector<int> currentPath(numCities);
-    for (int i = 0; i < numCities; ++i) {
-        currentPath[i] = i;
-    }
-    std::random_shuffle(currentPath.begin(), currentPath.end());
-
-    std::vector<int> bestPath = currentPath;
-    int bestCost = calculateTotalCost(currentPath, costMatrix);
-
-    int iteration = 0; // Dla schematu logarytmicznego
-    double linearStep = 0.001488888;
-
-    auto startTime = std::chrono::high_resolution_clock::now();
-
-    while (temperature > 0.5 ) {
-        std::vector<int> newPath = generateNewPath(currentPath);
-        int currentCost = calculateTotalCost(currentPath, costMatrix);
-        int newCost = calculateTotalCost(newPath, costMatrix);
-
-        auto currentTime = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::milliseconds >(currentTime - startTime).count();
-
-        if (duration > maxDuration) {
-            std::cout << "Maksymalny czas wykonania przekroczony. Przerywanie..." << std::endl;
-            break;
-        }
-
-        // Akceptacja nowej ścieżki
-        if (newCost < currentCost || (exp((currentCost - newCost) / temperature) > ((double)rand() / RAND_MAX))) {
-            currentPath = newPath;
-        }
-
-        if (newCost < bestCost) {
-            bestPath = newPath;
-            bestCost = newCost;
-        }
-
-        switch (coolingScheme) {
-            case 1: // Geometryczne
-                temperature *= coolingRate;
-                break;
-            case 2: // Liniowe
-
+            case 2:
                 temperature -= linearStep;
                 break;
-            case 3: // Logarytmiczne
-                temperature = temperature / ( log(2 + iteration));
-                iteration++;
+            case 3:
+//                temperature = initialTemperature * exp(-coolingRate * epochCounter);
+                temperature = initialTemperature / log(1 + epochCounter); // L
+                epochCounter += 1;
+//                std::cout << "pokaz: " << temperature << "epoki " <<  epochCounter <<std::endl;
+
                 break;
             default:
-                // Domyślnie użyjemy schładzania geometrycznego
                 temperature *= coolingRate;
-        };
+        }
+
     }
     auto endTime = std::chrono::high_resolution_clock::now();
-    auto totalDuration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
-//    std::cout << "Całkowity czas wykonania: " << totalDuration << " ms" << std::endl;
+    auto executionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
+    std::cout << "Execution time: " << executionTime << std::endl;
+    displaySolution(bestTour, cities);
+    savePathToFile(bestTour, calculatePathCost(bestTour, cities), executionTime, "sciezki.txt", coolingScheme);
+    return bestTour;
+}
 
-    displayFinalTemperatureInfo(temperature);
-    return resultForTest(totalDuration,bestPath,costMatrix);
+void SimulatedAnnealing::displaySolution(const std::vector<int> &tour, const std::vector<std::vector<int>> &cities) {
+    std::cout << "Trasa: ";
+    for (int city: tour) {
+        std::cout << city << " ";
+    }
+    std::cout << std::endl;
+
+    std::cout << "Długość trasy: " << calculatePathCost(tour, cities) << std::endl;
 }
 
 
+void SimulatedAnnealing::savePathToFile(const std::vector<int> &path, double pathCost, long long executionTime,
+                                        const std::string &fileName, int coolingScheme) {
+    std::filesystem::path projectPath = std::filesystem::current_path();
+    projectPath = projectPath.parent_path(); // Uzyskanie ścieżki do katalogu nadrzędnego
+    std::string filePath = projectPath.string() + "\\PEA_2\\data\\" + fileName;
+    std::cout << filePath;
+    std::ofstream file(filePath, std::ios::app);
 
+    if (!file.is_open()) {
+        throw std::runtime_error("Unable to open file: " + fileName);
+    }
+    switch (coolingScheme) {
+        case 1:
+            file << "Cooling Scheme: ";
+            file << "Geometrical";
+            break;
+        case 2:
+            file << "Cooling Scheme: ";
+            file << "Linear";
+            break;
+        case 3:
+            file << "Cooling Scheme: ";
+            file << "Logarythmical";
+            break;
+
+    }
+
+    file << "\n";
+    file << "Ścieżka:\n";
+    for (int city: path) {
+        file << city << " ";
+    }
+    file << path[0];
+    file << "\nDługość ścieżki: " << pathCost << "\nCzas wykonania: " << executionTime << " ms\n";
+    file.close();
+}
+
+std::string
+SimulatedAnnealing::simulatedAnnealingForTesting(const std::vector<std::vector<int>> &cities, double initialTemperature,
+                                                 double coolingRate, int epochs, int coolingScheme, int timeLimit) {
+    if (cities.empty()) {
+        throw std::invalid_argument("Cities vector cannot be empty.");
+    }
+
+    int n = cities.size();
+    std::vector<int> currentTour = initializeTour(n);
+    std::vector<int> bestTour = currentTour;
+
+    double currentLength = calculatePathCost(currentTour, cities);
+    double bestLength = currentLength;
+    double temperature = initialTemperature;
+    long long timeToSubtract = 0;
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, n - 1);
+    auto startTime = std::chrono::high_resolution_clock::now();
+    int epochCounter = 0;
+    while (temperature > 0.5) {
+        for (int epoch = 0; epoch < epochs; ++epoch) {
+            std::vector<int> newTour = currentTour;
+            int pos1 = dis(gen);
+            int pos2 = dis(gen);
+            std::swap(newTour[pos1], newTour[pos2]);
+
+            double newLength = calculatePathCost(newTour, cities);
+            double deltaLength = newLength - currentLength;
+
+            if (deltaLength < 0 || (std::generate_canonical<double, 10>(gen)) < std::exp(-deltaLength / temperature)) {
+                currentTour = newTour;
+                currentLength = newLength;
+
+                if (currentLength < bestLength) {
+                    bestTour = currentTour;
+                    bestLength = currentLength;
+                }
+            }
+
+
+        }
+        auto currentTime = std::chrono::high_resolution_clock::now();
+        auto workTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - startTime).count();
+//        if(epochCounter % 100 == 0){
+//            timeToSubtract += writeCurrentBestSolutionAndTimeToFile(cities,bestTour,workTime,"bestTime.txt",timeLimit,coolingScheme,epochs);
+//        }
+        if (workTime > timeLimit+timeToSubtract) {
+            std::cout << "Pogram zostal zakonczony przed czasem! " << std::endl;
+            auto endTime = std::chrono::high_resolution_clock::now();
+            auto executionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
+            std::cout << "Execution time: " << executionTime << std::endl;
+            int result = calculatePathCost(bestTour, cities);
+            displaySolution(bestTour, cities);
+            savePathToFile(bestTour, result, executionTime, "sciezki.txt", coolingScheme);
+            std::string finalResult;
+            finalResult.append(std::to_string(result));
+            finalResult.append(";");
+            finalResult.append(std::to_string(executionTime));
+            return finalResult;
+        }
+        double linearStep = 0.2;
+//        if(timeLimit == 3600000){
+//            linearStep = 0.32;
+//        }
+
+        switch (coolingScheme) {
+            case 1:
+                temperature *= coolingRate;
+                break;
+            case 2:
+                temperature -= linearStep;
+                break;
+            case 3:
+//                temperature = initialTemperature * exp(-coolingRate * epochCounter);
+                temperature = initialTemperature / log(1 + epochCounter); // L
+                epochCounter += 1;
+//                std::cout << "pokaz: " << temperature << "epoki " <<  epochCounter <<std::endl;
+
+                break;
+            default:
+                temperature *= coolingRate;
+        }
+
+    }
+    auto endTime = std::chrono::high_resolution_clock::now();
+    auto executionTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
+    std::cout << "Execution time: " << executionTime << std::endl;
+    displaySolution(bestTour, cities);
+    savePathToFile(bestTour, calculatePathCost(bestTour, cities), executionTime, "sciezki.txt", coolingScheme);
+    int result = calculatePathCost(bestTour, cities);
+    std::string finalResult;
+    finalResult.append(std::to_string(result));
+    finalResult.append(";");
+    finalResult.append(std::to_string(executionTime));
+    return finalResult;
+}
+
+long long SimulatedAnnealing::writeCurrentBestSolutionAndTimeToFile(const std::vector<std::vector<int>> &cities,const std::vector<int> &path,
+                                                               long long int executionTime,
+                                                               const std::string &fileName, int timeLimit, int coolingScheme, int epochs) {
+
+    auto startTime = std::chrono::high_resolution_clock::now();
+    std::filesystem::path projectPath = std::filesystem::current_path();
+    projectPath = projectPath.parent_path(); // Uzyskanie ścieżki do katalogu nadrzędnego
+    std::string filePath = projectPath.string() + "\\PEA_2\\data\\" + fileName;
+    std::cout << filePath;
+    std::ofstream file(filePath, std::ios::app);
+
+    int pathValue = calculatePathCost(path,cities);
+
+    if (!file.is_open()) {
+        throw std::runtime_error("Unable to open file: " + fileName);
+    }
+
+    if(epochs == 0){
+        switch (coolingScheme) {
+            case 1:
+                file << "Cooling Scheme: ";
+                file << "Geometrical";
+                file << "\n";
+                file << "Time Limit: ";
+                file << timeLimit;
+                file << "\n";
+                break;
+            case 2:
+                file << "Cooling Scheme: ";
+                file << "Linear";
+                file << "\n";
+                file << "Time Limit: ";
+                file << timeLimit;
+                file << "\n";
+                break;
+            case 3:
+                file << "Cooling Scheme: ";
+                file << "Logarythmical";
+                file << "\n";
+                file << "Time Limit: ";
+                file << timeLimit;
+                file << "\n";
+                break;
+
+        }
+
+    }
+
+    file << pathValue;
+    file << ";";
+    file << executionTime;
+
+
+    file.close();
+    auto endTime = std::chrono::high_resolution_clock::now();
+    auto workTime = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
+
+    return workTime;
+}

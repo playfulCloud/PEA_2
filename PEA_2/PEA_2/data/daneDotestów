@@ -1,0 +1,13 @@
+Geometryczne.
+Temperatura 1000 i coolingRate 99. dla wszystkich
+
+Liniowy:
+
+temperatura 300 55 linear step = 0.60 Epoki 10000
+temperatura 400 170 linear step = 0.60 Epoki 10000
+358 linear step = 400 temperatura linear step 0.32 10000
+
+Logarytmiczny
+
+temperatura 80 i współczynnik 0.99 i 130000 epok dla 55 i 170
+dla 358 temperatura 10 i 500 epok
