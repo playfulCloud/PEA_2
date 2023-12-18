@@ -229,3 +229,30 @@ void TabuSearchImplementation::saveBestPathToFile(const std::string& fileName, i
         std::cerr << "Unable to open file: " << fileName << "\n";
     }
 }
+
+std::vector<int> TabuSearchImplementation::generateGreedyPath(std::vector<std::vector<int>>& matrix) {
+    std::vector<int> path;
+    std::vector<bool> visited(matrix.size(), false);
+
+    int currentCity = 0; // starting city
+    path.push_back(currentCity);
+    visited[currentCity] = true;
+
+    for (size_t i = 1; i < matrix.size(); ++i) {
+        int closestCity = -1;
+        int closestDistance = INT_MAX;
+
+        for (size_t j = 0; j < matrix.size(); ++j) {
+            if (!visited[j] && matrix[currentCity][j] < closestDistance) {
+                closestDistance = matrix[currentCity][j];
+                closestCity = j;
+            }
+        }
+
+        path.push_back(closestCity);
+        visited[closestCity] = true;
+        currentCity = closestCity;
+    }
+
+    return path;
+}

@@ -41,6 +41,8 @@ public:
     void random(std::vector<std::vector<int>> &matrix);
 
     void saveBestPathToFile(const std::string &filename,int currentCost);
+
+    std::vector<int> generateGreedyPath(std::vector<std::vector<int>> &matrix);
 };
 
 
