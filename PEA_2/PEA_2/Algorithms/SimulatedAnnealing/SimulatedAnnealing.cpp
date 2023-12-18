@@ -44,12 +44,25 @@ SimulatedAnnealing::simulatedAnnealing(const std::vector<std::vector<int>> &citi
     double bestLength = currentLength;
     double temperature = initialTemperature;
 
+    auto lastSaveTime = std::chrono::high_resolution_clock::now();
+    const long long saveInterval = 40000; // 20 sekund w milisekundach
+
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(0, n - 1);
     auto startTime = std::chrono::high_resolution_clock::now();
     int epochCounter = 0;
     while (temperature > 0.5) {
+
+        auto currentTime2 = std::chrono::high_resolution_clock::now();
+        auto timeSinceLastSave = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime2 - lastSaveTime).count();
+
+        if (timeSinceLastSave >= saveInterval) {
+            // Zapisz aktualny czas i najlepsze rozwiązanie do pliku
+            long long currentExecutionTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime2 - startTime).count();
+            savePathToFile(bestTour, calculatePathCost(bestTour, cities), currentExecutionTime, "periodic_save.txt", coolingScheme);
+            lastSaveTime = currentTime2;
+        }
 
         for (int epoch = 0; epoch < epochs; ++epoch) {
             std::vector<int> newTour = currentTour;

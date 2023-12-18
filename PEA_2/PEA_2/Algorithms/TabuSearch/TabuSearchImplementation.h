@@ -39,6 +39,8 @@ public:
     int calculatePathCost(const std::vector<int> &path, std::vector<std::vector<int>> &matrix);
 
     void random(std::vector<std::vector<int>> &matrix);
+
+    void saveBestPathToFile(const std::string &filename,int currentCost);
 };
 
 

@@ -7,6 +7,8 @@
 #include <random>
 #include "TabuSearchImplementation.h"
 #include <random>
+#include <filesystem>
+#include <fstream>
 
 TabuSearchImplementation::TabuSearchImplementation() {
 
@@ -19,6 +21,7 @@ std::string TabuSearchImplementation::solve(std::vector<std::vector<int>> matrix
     int iterations = 10 * matrix.size();
     int nextCost, currentCost;
     auto millisActualTime = std::chrono::high_resolution_clock::now();
+    auto lastSaveTime = std::chrono::high_resolution_clock::now();
 
     int resetTabuCounter = 0;
     const int resetTabuInterval = 100;  // Co ile iteracji resetować część macierzy tabu
@@ -45,6 +48,16 @@ std::string TabuSearchImplementation::solve(std::vector<std::vector<int>> matrix
 
                     currentCost = calculatePathCost(currentPath,matrix);
 
+                    auto currentTime2 = std::chrono::high_resolution_clock::now();
+                    auto timeSinceLastSave = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime2 - lastSaveTime).count();
+
+                    if (timeSinceLastSave >= 20000) {
+                        // Zapisz aktualny czas i najlepsze rozwiązanie do pliku
+                        long long currentExecutionTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime2 - millisActualTime).count();
+                        saveBestPathToFile("tabuSave.txt",currentCost);
+                        lastSaveTime = currentTime2;
+                    }
+
                     if (currentCost < bestCost) {
                         bestPath = currentPath;
                         bestCost = currentCost;
@@ -56,6 +69,8 @@ std::string TabuSearchImplementation::solve(std::vector<std::vector<int>> matrix
                             nextPath = currentPath;
                         }
                     }
+
+
 
                     if (currentCost < nextCost && tabuMatrix[i][j] < a) {
                         nextCost = currentCost;
@@ -88,6 +103,8 @@ std::string TabuSearchImplementation::solve(std::vector<std::vector<int>> matrix
             }
             resetTabuCounter++;
 
+
+
             auto currentTime = std::chrono::high_resolution_clock::now();
             executionTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - millisActualTime).count();
             if (executionTime > timeLimit) {
@@ -100,6 +117,8 @@ std::string TabuSearchImplementation::solve(std::vector<std::vector<int>> matrix
                 std::string result =  std::to_string(bestCost) + ";" + std::to_string(bestSolutionTime);
                 return result;
             }
+
+
         }
     }
 }
@@ -193,5 +212,20 @@ void TabuSearchImplementation::random(std::vector<std::vector<int>>& matrix) {
             std::cout << "Najlepsze rozwiązanie znaleziono w: " << bestSolutionTime << " ms\n";
             return;
         }
+    }
+}
+
+void TabuSearchImplementation::saveBestPathToFile(const std::string& fileName, int currentCost) {
+    std::filesystem::path projectPath = std::filesystem::current_path();
+    projectPath = projectPath.parent_path(); // Uzyskanie ścieżki do katalogu nadrzędnego
+    std::string filePath = projectPath.string() + "\\PEA_2\\data\\" + fileName;
+    std::cout << filePath;
+    std::ofstream outFile(filePath, std::ios::app);
+
+    if (outFile.is_open()) {
+        outFile << bestCost << ";" << bestSolutionTime << "\n";
+        outFile.close();
+    } else {
+        std::cerr << "Unable to open file: " << fileName << "\n";
     }
 }
